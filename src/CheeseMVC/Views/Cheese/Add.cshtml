@@ -1,5 +1,43 @@
-﻿<h1>Add Cheese</h1>
+﻿<!-- If using the AddCheeseViewModel
+    (at)model CheeseMVC.ViewModels.AddCheeseViewModel
 
+    -->
+@model CheeseMVC.ViewModels.AddCheeseViewModel
+<h1>Add Cheese</h1>
+
+<!-- Form with tag helpers - using a ViewModel -->
+<form asp-controller="Cheese" asp-action="Add" method="post">
+    <!-- Disply all error messages that are associated with all data for this form above the form
+    <div asp-validation-summary="All"></div> -->
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <!-- to display an error message with the form input -->
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input class="form-control" asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Type"></label>
+        <select asp-for="Type" asp-items="Model.CheeseTypes"></select>
+    </div>
+    <div class="'form-group">
+        <label asp-for="Rating"></label>
+        <input class="form-control" asp-for="Rating" />
+        <span asp-validation-for="Rating"></span>
+    </div>
+
+
+    <input type="submit" value="Add Cheese" />
+
+</form>
+
+<!-- basic form  - no tag helpers
 <form method="post">
 
     <div class="form-group">
@@ -14,3 +52,4 @@
     <input type="submit" value="Add Cheese" />
 
 </form>
+-->

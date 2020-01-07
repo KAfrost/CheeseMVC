@@ -1,6 +1,20 @@
-﻿@model CheeseMVC.ViewModels.CheeseListViewModel
+﻿<!-- When you want to use a VieModel you have to declare it at the top of the view template
+    We don't have a 'using' here so we have to list the fully qualified type.
+    "model" will be of type "List...cheese"
+    (at)model List<CheeseMVC.Models.Cheese>
+    -->
+
+@model CheeseMVC.ViewModels.CheeseListViewModel
 
 <h1>@Model.Title</h1>
+
+<!-- If using a Viewbag you must call the object by name which can alow for errors, i.e. spelling errors, which won't manifest as
+    an error until runtime.
+    (at)if (ViewBag.cheese.Count == 0)
+    -->
+<!-- If using the List model
+    (at)if (Model.Count == 0)
+    -->
 
 @if (Model.Cheeses.Count == 0)
 {
@@ -12,15 +26,32 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Type</th>
+        <th>Rating</th>
         <th>Actions</th>
+        <th>Edit</th>
+        
     </tr>
+
+    <!-- iterate across the dictionary of items in notes
+     for ViewBag
+        (at)foreach (var cheese in ViewBag.cheeses)
+
+     for List model
+        (at)foreach (var cheese in Model)
+
+     -->
+
 
     @foreach (var cheese in Model.Cheeses)
     {
         <tr>
             <td>@cheese.Name</td>
             <td>@cheese.Description</td>
+            <td>@cheese.Type</td>
+            <td>@cheese.Rating</td>
             <td><a asp-controller="Cheese" asp-action="Detail" asp-route-id="@cheese.CheeseId">detail</a></td>
+            <td><a asp-controller="Cheese" asp-action="Edit" asp-route-cheeseId="@cheese.CheeseId">edit</a></td>
         </tr>
     }
 </table>
